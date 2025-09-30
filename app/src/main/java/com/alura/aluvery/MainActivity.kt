@@ -18,18 +18,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyFirstComposable();
+            AluveryTheme {
+                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
+                    MyFirstComposable(
+                        name = "Composable",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun MyFirstComposable(){
-    Text(text = "My first Composable")
+fun MyFirstComposable(name: String, modifier: Modifier){
+    Text(text = "My First $name")
 }
 
 @Preview
 @Composable
 fun MyFirstComposablePreview(){
-    MyFirstComposable()
+    MyFirstComposable(name = "Composable", modifier = Modifier.padding())
 }
