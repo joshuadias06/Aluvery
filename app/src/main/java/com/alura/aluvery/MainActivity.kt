@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -30,13 +33,34 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview
 @Composable
-fun MyFirstComposable(name: String, modifier: Modifier){
-    Text(text = "My First $name")
+fun ColumnPreview(){
+    Column(){
+        Text(text = "Composable 1")
+        Text(text = "Composable 2")
+    }
 }
 
 @Preview
 @Composable
-fun MyFirstComposablePreview(){
-    MyFirstComposable(name = "Composable", modifier = Modifier.padding())
+fun RowPreview(){
+    Row(){
+        Text(text = "Composable 1")
+        Text(text = "Composable 2")
+    }
+}
+
+@Preview
+@Composable
+fun BoxPreview(){
+    Box(){
+        Text(text = "Composable 1")
+        Text(text = "Composable 2")
+    }
+}
+
+@Composable
+fun MyFirstComposable(name: String, modifier: Modifier){
+    Text(text = "My First $name")
 }
