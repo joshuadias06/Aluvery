@@ -1,8 +1,5 @@
 package com.alura.aluvery.ui.components
 
-import androidx.compose.foundation.R
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,18 +12,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alura.aluvery.model.Product
-import java.math.BigDecimal
+import com.alura.aluvery.sampledata.sampleProducts
 
 @Composable
-fun ProductSection(){
-    Column{
+fun ProductSection(title: String, products: List<Product>) {
+    Column {
         Text(
-            text = "Promoções",
+            text = title,
             Modifier
                 .padding(
                     start = 16.dp,
@@ -43,29 +39,12 @@ fun ProductSection(){
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ){
+        ) {
             Spacer(Modifier)
-            ProductItem(
-                Product(
-                    name = "Hamburguer",
-                    price = BigDecimal("12.99"),
-                    image = com.alura.aluvery.R.drawable.burger
-                )
-            )
-            ProductItem(
-                Product(
-                    name = "Pizza",
-                    price = BigDecimal("19.99"),
-                    image = com.alura.aluvery.R.drawable.pizza
-                )
-            )
-            ProductItem(
-                Product(
-                    name = "Batata Frita",
-                    price = BigDecimal("9.99"),
-                    image = com.alura.aluvery.R.drawable.fries
-                )
-            )
+            for (p in products) {
+                ProductItem(product = p)
+            }
+
             Spacer(Modifier)
         }
     }
@@ -73,6 +52,6 @@ fun ProductSection(){
 
 @Preview(showBackground = true)
 @Composable
-fun ProductSectionPreview(){
-    ProductSection()
+fun ProductSectionPreview() {
+    ProductSection(title = "Promotions", products = sampleProducts)
 }
