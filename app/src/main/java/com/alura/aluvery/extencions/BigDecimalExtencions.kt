@@ -5,7 +5,8 @@ import java.text.NumberFormat
 import java.util.Locale
 
 fun BigDecimal.toBrazilianCurrency(): String {
+    val locale = Locale.forLanguageTag("pt-BR")
     return NumberFormat
-        .getCurrencyInstance(Locale("pt", "BR"))
+        .getCurrencyInstance(locale)
         .format(this)
 }

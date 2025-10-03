@@ -1,13 +1,9 @@
 package com.alura.aluvery.ui.components
 
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,24 +13,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alura.aluvery.model.Product
 import com.alura.aluvery.sampledata.sampleProducts
+import com.alura.aluvery.ui.theme.AluveryTheme
 
 @Composable
-fun ProductSection(title: String, products: List<Product>) {
+fun ProductSection(
+    title: String,
+    products: List<Product>
+) {
     Column {
         Text(
             text = title,
-            Modifier
-                .padding(
-                    start = 16.dp,
-                    end = 16.dp
-                ),
+            Modifier.padding(
+                start = 16.dp,
+                end = 16.dp
+            ),
             fontSize = 20.sp,
             fontWeight = FontWeight(400)
         )
         Row(
             Modifier
                 .padding(
-                    top = 8.dp,
+                    top = 8.dp
                 )
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState()),
@@ -44,7 +43,6 @@ fun ProductSection(title: String, products: List<Product>) {
             for (p in products) {
                 ProductItem(product = p)
             }
-
             Spacer(Modifier)
         }
     }
@@ -52,6 +50,10 @@ fun ProductSection(title: String, products: List<Product>) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductSectionPreview() {
-    ProductSection(title = "Promotions", products = sampleProducts)
+private fun ProductsSectionPreview() {
+    AluveryTheme {
+        Surface {
+            ProductSection("Promoções", products = sampleProducts)
+        }
+    }
 }

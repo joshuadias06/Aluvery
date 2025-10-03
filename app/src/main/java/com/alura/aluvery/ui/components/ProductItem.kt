@@ -1,19 +1,12 @@
 package com.alura.aluvery.ui.components
 
+import androidx.compose.material3.Surface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,16 +25,17 @@ import androidx.compose.ui.unit.sp
 import com.alura.aluvery.R
 import com.alura.aluvery.extencions.toBrazilianCurrency
 import com.alura.aluvery.model.Product
-import com.alura.aluvery.ui.theme.Purple500
-import com.alura.aluvery.ui.theme.Teal200
+import com.alura.aluvery.ui.theme.AluveryTheme
+
 import java.math.BigDecimal
 
 @Composable
 fun ProductItem(product: Product) {
-    Surface (
+    Surface(
         shape = RoundedCornerShape(15.dp),
+        tonalElevation = 4.dp,
         shadowElevation = 4.dp
-    ){
+    ) {
         Column(
             Modifier
                 .heightIn(250.dp, 300.dp)
@@ -54,14 +48,16 @@ fun ProductItem(product: Product) {
                     .background(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
-                                Purple500, Teal200
+                                MaterialTheme.colorScheme.primary,
+                                MaterialTheme.colorScheme.secondary
                             )
                         )
                     )
                     .fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(product.image),
+                    // TODO: ajustar imagem do produto
+                    painter = painterResource(id = R.drawable.placeholder),
                     contentDescription = null,
                     Modifier
                         .size(imageSize)
@@ -72,10 +68,7 @@ fun ProductItem(product: Product) {
                 )
             }
             Spacer(modifier = Modifier.height(imageSize / 2))
-            Column(
-                Modifier
-                    .padding(16.dp)
-            ) {
+            Column(Modifier.padding(16.dp)) {
                 Text(
                     text = product.name,
                     fontSize = 18.sp,
@@ -85,23 +78,26 @@ fun ProductItem(product: Product) {
                 )
                 Text(
                     text = product.price.toBrazilianCurrency(),
-                    Modifier
-                        .padding(top = 8.dp),
+                    Modifier.padding(top = 8.dp),
                     fontSize = 14.sp,
                     fontWeight = FontWeight(400)
                 )
             }
         }
-
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ProductItemPreview() {
-    ProductItem(Product(
-        name = LoremIpsum(50).values.first(),
-        price = BigDecimal("14,99"),
-        image = R.drawable.ic_launcher_background
-    ))
+private fun ProductItemPreview() {
+    AluveryTheme {
+        Surface {
+            ProductItem(
+                Product(
+                    name = LoremIpsum(50).values.first(),
+                    price = BigDecimal("14.99")
+                )
+            )
+        }
+    }
 }
