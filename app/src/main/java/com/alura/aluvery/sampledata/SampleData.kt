@@ -63,12 +63,13 @@ val sampleProducts: List<Product> = listOf(
         price = BigDecimal("19.99"),
         image = "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
     ),
-    Product(
-        name = "Batata frita",
-        price = BigDecimal("7.99"),
-        image = "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg",
-        description = LoremIpsum(20).values.first()
-    ), *sampleDrinks.toTypedArray(), *sampleCandies.toTypedArray()
+//    Product(
+//        name = "Salada de fruta",
+//        price = BigDecimal("8.99"),
+//        image = "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg",
+//        description = LoremIpsum(20).values.first()
+//    ),
+    *sampleDrinks.toTypedArray(), *sampleCandies.toTypedArray()
 )
 
 val sampleSections = mapOf(
