@@ -14,12 +14,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.alura.aluvery.dao.ProductDao
+import com.alura.aluvery.model.Product
 import com.alura.aluvery.sampledata.sampleCandies
 import com.alura.aluvery.sampledata.sampleDrinks
+import com.alura.aluvery.sampledata.sampleProducts
 import com.alura.aluvery.sampledata.sampleSections
+import com.alura.aluvery.stateholders.home.HomeScreenUiState
 import com.alura.aluvery.ui.screens.HomeScreen
 import com.alura.aluvery.ui.theme.AluveryTheme
 
@@ -35,14 +42,9 @@ class MainActivity : ComponentActivity() {
                 onFabClick = {
                     val intent = Intent(this, ProductFormActivity::class.java)
                     startActivity(intent)
-                }){
-                val sections = mapOf(
-                    "Todos produtos" to dao.products(),
-                    "Promoçoes" to sampleCandies + sampleDrinks,
-                    "Doces" to sampleCandies,
-                    "Bebidas" to sampleDrinks
-                )
-                HomeScreen(sections = sections)
+                }) {
+                val products = dao.products()
+                HomeScreen(products = products)
             }
         }
     }
@@ -76,7 +78,13 @@ fun App(
 @Preview(showSystemUi = true)
 @Composable
 fun AppPreview() {
-    App{
-        HomeScreen(sections = sampleSections)
+    App {
+        HomeScreen(
+            HomeScreenUiState(
+                sections = sampleSections,
+                searchedProducts = sampleProducts,
+                searchText = "",
+                onSearchChange = {})
+        )
     }
 }

@@ -27,8 +27,7 @@
         </activity>
         <activity
             android:name=".ui.activities.ProductFormActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:exported="true">
         </activity>
     </application>
 
