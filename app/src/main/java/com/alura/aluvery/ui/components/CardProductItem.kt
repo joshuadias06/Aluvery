@@ -1,9 +1,15 @@
 package com.alura.aluvery.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,12 +29,19 @@ import java.math.BigDecimal
 fun CardProductItem(
     product: Product,
     modifier: Modifier = Modifier,
-    elevation: Dp = 4.dp
+    elevation: Dp = 4.dp,
+    isExpanded: Boolean = false
 ) {
+    var expanded by rememberSaveable {
+        mutableStateOf(isExpanded)
+    }
     Card(
         modifier
             .fillMaxWidth()
-            .heightIn(150.dp),
+            .heightIn(150.dp)
+            .clickable {
+                expanded = !expanded
+            },
         elevation = CardDefaults.cardElevation(defaultElevation = elevation)
     ) {
         Column {
@@ -59,11 +72,13 @@ fun CardProductItem(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             }
-            product.description?.let {
-                Text(
-                    text = product.description,
-                    modifier = Modifier.padding(16.dp)
-                )
+            if (expanded) {
+                product.description?.let {
+                    Text(
+                        text = product.description,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
         }
     }
@@ -80,7 +95,8 @@ private fun CardProductItemPreview() {
                     price = BigDecimal(10.00),
                     image = "",
                     description = LoremIpsum(20).values.first()
-                )
+                ),
+                isExpanded = true
             )
         }
     }

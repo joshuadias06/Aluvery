@@ -1,8 +1,8 @@
-package com.alura.aluvery.stateholders.home
+package com.alura.aluvery.ui.states
 
 import com.alura.aluvery.model.Product
 
-class HomeScreenUiState(
+data class HomeScreenUiState(
     val sections: Map<String, List<Product>> = emptyMap(),
     val searchedProducts: List<Product> = emptyList(),
     val searchText: String = "",
